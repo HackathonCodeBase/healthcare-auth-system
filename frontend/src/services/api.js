@@ -23,10 +23,27 @@ api.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
-        // Basic retry logic or logout on 401 could go here
+
         if (error.response?.status === 401 && !originalRequest._retry) {
-            // For a demo, let's keep it simple: clear auth state on 401
-            useAuthStore.getState().logout();
+            originalRequest._retry = true;
+            try {
+                const store = useAuthStore.getState();
+                const refreshToken = store.refreshToken;
+                if (!refreshToken) throw new Error("No refresh token");
+
+                const res = await axios.post('http://localhost:3000/api/auth/refresh', {
+                    token: refreshToken
+                });
+
+                const newAccessToken = res.data.data.accessToken;
+                store.setLogin(store.user, newAccessToken, refreshToken);
+
+                originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+                return api(originalRequest);
+            } catch (refreshError) {
+                useAuthStore.getState().logout();
+                return Promise.reject(refreshError);
+            }
         }
         return Promise.reject(error);
     }
