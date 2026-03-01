@@ -34,11 +34,11 @@ const Privacy = () => {
         <div className="space-y-6 animate-in fade-in">
             <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-dark-card border border-dark-border p-6 rounded-2xl shadow-lg">
                 <div className="flex items-center gap-4">
-                    <div className="bg-teal-500/20 text-teal-400 p-3 rounded-xl border border-teal-500/20 shadow-[0_0_15px_rgba(20,184,166,0.2)]">
+                    <div className="bg-blue-600/20 text-blue-400 p-3 rounded-xl border border-blue-500/20 shadow-[0_0_15px_rgba(20,184,166,0.2)]">
                         <ShieldCheck size={28} />
                     </div>
                     <div>
-                        <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-blue-500">Privacy & Access Timeline</h2>
+                        <h2 className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-500">Privacy & Access Timeline</h2>
                         <p className="text-xs text-dark-textMuted mt-1">Immutable ledger tracking exactly who accessed your medical records and when.</p>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ const Privacy = () => {
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         placeholder="Search accesses..."
-                        className="w-full bg-dark-bg border border-dark-border pl-9 pr-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:border-teal-400 focus:ring-teal-400/50 transition-all font-mono"
+                        className="w-full bg-dark-bg border border-dark-border pl-9 pr-4 py-2.5 rounded-xl text-sm focus:outline-none focus:ring-1 focus:border-blue-400 focus:ring-blue-400/50 transition-all font-mono"
                     />
                 </div>
             </div>
@@ -58,7 +58,7 @@ const Privacy = () => {
             <div className="bg-dark-card border border-dark-border rounded-2xl overflow-hidden shadow-xl">
                 {loading ? (
                     <div className="p-12 flex justify-center items-center gap-3 text-dark-textMuted">
-                        <Loader2 size={24} className="animate-spin text-teal-500" />
+                        <Loader2 size={24} className="animate-spin text-blue-500" />
                         <span className="text-sm font-medium">Decrypting access ledger...</span>
                     </div>
                 ) : (
@@ -77,7 +77,7 @@ const Privacy = () => {
                                     <tr key={log.id} className="hover:bg-dark-bg/50 transition-colors">
                                         <td className="px-6 py-4">
                                             <div className="flex items-center gap-2 text-dark-textMuted font-mono text-[11px] bg-dark-bg/50 px-2.5 py-1 rounded-lg w-fit border border-dark-border/50">
-                                                <Clock size={12} className="text-teal-500/70" />
+                                                <Clock size={12} className="text-blue-500/70" />
                                                 {format(new Date(log.timestamp), 'MMM dd yyyy HH:mm:ss')}
                                             </div>
                                         </td>
@@ -88,7 +88,7 @@ const Privacy = () => {
                                                 </div>
                                                 <div>
                                                     <p className="font-semibold text-dark-text leading-tight">{log.user?.name || log.user?.email || 'System Operation'}</p>
-                                                    <p className="text-[10px] text-teal-400 uppercase tracking-wide mt-0.5">{log.user?.role}</p>
+                                                    <p className="text-[10px] text-blue-400 uppercase tracking-wide mt-0.5">{log.user?.role}</p>
                                                 </div>
                                             </div>
                                         </td>

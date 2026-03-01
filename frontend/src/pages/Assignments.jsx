@@ -68,7 +68,7 @@ const Assignments = () => {
         <div className="space-y-6 animate-in fade-in">
             <div className="bg-dark-card border border-dark-border p-6 rounded-2xl shadow-lg flex justify-between items-center gap-4">
                 <div>
-                    <h2 className="text-xl font-bold flex items-center gap-2 text-teal-400">
+                    <h2 className="text-xl font-bold flex items-center gap-2 text-blue-400">
                         <LinkIcon /> Role Assignment Engine
                     </h2>
                     <p className="text-dark-textMuted text-sm mt-1">
@@ -85,7 +85,7 @@ const Assignments = () => {
                             value={staffId}
                             onChange={(e) => setStaffId(e.target.value)}
                             required
-                            className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 text-dark-text appearance-none"
+                            className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 text-dark-text appearance-none"
                         >
                             <option value="">Select Staff...</option>
                             {users.map(u => (
@@ -100,7 +100,7 @@ const Assignments = () => {
                             value={patientId}
                             onChange={(e) => setPatientId(e.target.value)}
                             required
-                            className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500 text-dark-text appearance-none"
+                            className="w-full bg-dark-bg border border-dark-border rounded-xl px-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 text-dark-text appearance-none"
                         >
                             <option value="">Select Patient...</option>
                             {patients.map(p => (
@@ -113,7 +113,7 @@ const Assignments = () => {
                         <button
                             type="submit"
                             disabled={submitting}
-                            className="w-full bg-teal-500 hover:bg-teal-400 text-dark-bg font-bold py-2 px-4 rounded-xl shadow-[0_0_20px_rgba(20,184,166,0.3)] disabled:opacity-50 transition-all flex items-center justify-center gap-2"
+                            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-xl shadow-[0_0_20px_rgba(59,130,246,0.3)] disabled:opacity-50 transition-all flex items-center justify-center gap-2"
                         >
                             {submitting ? <Loader2 size={18} className="animate-spin" /> : <PlusCircle size={18} />} Create Assignment
                         </button>
@@ -137,7 +137,7 @@ const Assignments = () => {
                                 <tr key={a.id} className="hover:bg-dark-bg/50 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="font-semibold text-dark-text">{a.staff?.name}</div>
-                                        <div className="text-[10px] uppercase font-bold text-teal-400">{a.staff?.role}</div>
+                                        <div className="text-[10px] uppercase font-bold text-blue-400">{a.staff?.role}</div>
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="font-semibold text-dark-text">{a.patient?.user?.name || 'Unknown Patient'}</div>

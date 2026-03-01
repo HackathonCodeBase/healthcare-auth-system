@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ShieldCheck, Mail, Lock, Loader2 } from 'lucide-react';
+import { Shield, Mail, Lock, Loader2, Eye, EyeOff } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 import api from '../services/api';
@@ -10,19 +10,19 @@ const Login = () => {
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const setLogin = useAuthStore((state) => state.setLogin);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
+        setErrorMessage('');
 
         try {
             const { data } = await api.post('/auth/login', { email, password });
-
             const { user, accessToken, refreshToken } = data.data;
             setLogin(user, accessToken, refreshToken);
             toast.success('Login Successful');
-
         } catch (err) {
             const message = err.response?.data?.message || 'Login failed. Please try again.';
             setErrorMessage(message);
@@ -33,68 +33,88 @@ const Login = () => {
     };
 
     return (
-        <div className="min-h-screen grid items-center justify-center bg-dark-bg text-dark-text p-4">
-            <div className="w-full max-w-md bg-dark-card border border-dark-border rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center bg-dark-bg p-4">
+            <div className="w-full max-w-sm">
 
-                {/* Decorative elements */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl -mr-16 -mt-16"></div>
-                <div className="absolute bottom-0 left-0 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl -ml-16 -mb-16"></div>
-
-                <div className="relative z-10 text-center mb-10">
-                    <div className="w-16 h-16 bg-teal-500/20 text-teal-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-teal-500/20">
-                        <ShieldCheck size={32} />
+                {/* Brand */}
+                <div className="flex flex-col items-center justify-center gap-3 mb-10 text-center">
+                    <div className="w-14 h-14 rounded-2xl bg-blue-600 flex items-center justify-center shadow-[0_0_30px_rgba(59,130,246,0.3)]">
+                        <Shield size={28} className="text-white" />
                     </div>
-                    <h1 className="text-2xl font-bold tracking-tight">MedAuth Control</h1>
-                    <p className="text-dark-textMuted mt-2 text-sm">Secure Authentication & Access Panel</p>
+                    <div>
+                        <p className="font-bold text-white text-2xl leading-tight tracking-tight">MedAuth</p>
+                        <p className="text-xs text-dark-textMuted mt-0.5">TetherX Hackathon</p>
+                    </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="relative z-10 space-y-5">
+                {/* Card */}
+                <div className="bg-dark-card border border-dark-border rounded-xl p-6 shadow-xl">
+                    <h1 className="text-2xl font-bold text-white mb-1">Sign in</h1>
+                    <p className="text-sm text-dark-textMuted mb-7">Enter your credentials to access the portal</p>
+
                     {errorMessage && (
-                        <div className="bg-red-500/10 border border-red-500/50 text-red-400 p-3 rounded-xl mb-4 text-sm text-center">
+                        <div className="bg-red-500/10 border border-red-500/20 text-red-400 px-4 py-3 rounded-lg mb-5 text-sm">
                             {errorMessage}
                         </div>
                     )}
-                    <div className="space-y-1">
-                        <label className="text-sm font-medium text-dark-textMuted block px-1">Email Address</label>
-                        <div className="relative">
-                            <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-dark-textMuted" />
-                            <input
-                                type="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                required
-                                className="w-full bg-dark-bg border border-dark-border rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all placeholder:text-dark-textMuted/50"
-                                placeholder="sidarthvacharyaa@gmail.com"
-                            />
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-medium text-dark-textMuted block">Email Address</label>
+                            <div className="relative">
+                                <Mail size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-dark-textMuted" />
+                                <input
+                                    type="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                    className="w-full bg-dark-bg border border-dark-border rounded-lg pl-9 pr-4 py-2.5 text-sm text-dark-text focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder:text-dark-textMuted/50"
+                                    placeholder="you@example.com"
+                                />
+                            </div>
                         </div>
-                    </div>
 
-                    <div className="space-y-1">
-                        <label className="text-sm font-medium text-dark-textMuted block px-1">Password</label>
-                        <div className="relative">
-                            <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-dark-textMuted" />
-                            <input
-                                type="password"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                                required
-                                className="w-full bg-dark-bg border border-dark-border rounded-xl pl-11 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/50 focus:border-teal-500 transition-all"
-                                placeholder="••••••••"
-                            />
+                        <div className="space-y-1.5">
+                            <label className="text-xs font-medium text-dark-textMuted block">Password</label>
+                            <div className="relative">
+                                <Lock size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-dark-textMuted" />
+                                <input
+                                    type={showPassword ? 'text' : 'password'}
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className="w-full bg-dark-bg border border-dark-border rounded-lg pl-9 pr-10 py-2.5 text-sm text-dark-text focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder:text-dark-textMuted/50"
+                                    placeholder="••••••••"
+                                />
+                                {password.length > 0 && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowPassword(prev => !prev)}
+                                        className="absolute right-3 top-1/2 -translate-y-1/2 text-dark-textMuted hover:text-blue-400 transition-colors"
+                                        tabIndex={-1}
+                                        aria-label={showPassword ? 'Hide password' : 'Show password'}
+                                    >
+                                        {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                                    </button>
+                                )}
+                            </div>
                         </div>
-                    </div>
 
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="w-full bg-teal-500 hover:bg-teal-400 text-dark-bg font-semibold py-3 rounded-xl transition-all shadow-[0_0_20px_rgba(20,184,166,0.3)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                    >
-                        {loading ? <Loader2 size={18} className="animate-spin" /> : 'Authenticate Access'}
-                    </button>
-                </form>
+                        <button
+                            type="submit"
+                            disabled={loading}
+                            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 text-sm mt-2"
+                        >
+                            {loading ? <Loader2 size={16} className="animate-spin" /> : 'Sign in'}
+                        </button>
+                    </form>
+                </div>
 
-                <p className="mt-8 text-sm text-center text-dark-textMuted">
-                    Don't have an account? <Link to="/signup" className="text-teal-400 hover:text-teal-300 font-medium">Sign up</Link>
+                <p className="mt-4 text-center text-sm text-dark-textMuted">
+                    Don't have an account?{' '}
+                    <Link to="/signup" className="text-blue-400 hover:text-blue-300 font-medium transition-colors">
+                        Register
+                    </Link>
                 </p>
             </div>
         </div>

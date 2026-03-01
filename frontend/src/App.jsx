@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import useAuthStore from './store/authStore';
@@ -29,12 +29,17 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
 };
 
 const Layout = ({ children }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
   return (
-    <div className="flex bg-dark-bg min-h-screen text-dark-text">
-      <Sidebar />
-      <div className="flex flex-col flex-1 w-full overflow-hidden">
-        <Header />
-        <main className="flex-1 overflow-auto p-6 lg:p-10">
+    <div className="flex bg-dark-bg min-h-screen text-dark-text overflow-hidden">
+      <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+      <div className="flex flex-col flex-1 min-w-0">
+        <Header
+          onMenuToggle={() => setSidebarOpen(prev => !prev)}
+          isSidebarOpen={sidebarOpen}
+        />
+        <main className="flex-1 overflow-auto p-4 sm:p-6 lg:p-10">
           <div className="max-w-6xl mx-auto">{children}</div>
         </main>
       </div>

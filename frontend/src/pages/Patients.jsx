@@ -54,7 +54,7 @@ const Patients = () => {
                         placeholder="Search name..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="w-full bg-dark-bg border border-dark-border rounded-xl pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
+                        className="w-full bg-dark-bg border border-dark-border rounded-xl pl-10 pr-4 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                 </div>
             </div>
@@ -84,7 +84,7 @@ const Patients = () => {
                                         <td className="px-6 py-4 text-right">
                                             <button
                                                 onClick={() => handleDetailedView(p.id)}
-                                                className="inline-flex items-center gap-2 bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 px-3 py-1.5 rounded-lg border border-teal-500/20 transition-all text-xs font-semibold"
+                                                className="inline-flex items-center gap-2 bg-blue-500/10 text-blue-400 hover:bg-blue-500/20 px-3 py-1.5 rounded-lg border border-blue-500/20 transition-all text-xs font-semibold"
                                             >
                                                 {modalLoading ? <Loader2 size={14} className="animate-spin" /> : <Info size={14} />} Full Record Access
                                             </button>
@@ -109,7 +109,7 @@ const Patients = () => {
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
                     <div className="bg-dark-card border border-dark-border rounded-2xl w-full max-w-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
                         <div className="p-6 border-b border-dark-border flex justify-between items-center bg-gradient-to-r from-dark-card to-dark-bg">
-                            <h2 className="text-xl font-bold flex items-center gap-2 text-teal-400">
+                            <h2 className="text-xl font-bold flex items-center gap-2 text-blue-400">
                                 <ShieldCheck size={24} /> Verified Medical Record
                             </h2>
                             <button onClick={() => setSelectedPatient(null)} className="text-dark-textMuted hover:text-white transition-colors">

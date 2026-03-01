@@ -1,25 +1,29 @@
 @import "tailwindcss";
 
 @theme {
-  --color-dark-bg: #0f172a;
-  --color-dark-card: #1e293b;
-  --color-dark-nav: #0b1120;
-  --color-dark-border: #334155;
-  --color-dark-text: #f8fafc;
-  --color-dark-textMuted: #94a3b8;
+  /* TetherX Hackathon Theme */
+  --color-dark-bg: #0a0a0a;
+  --color-dark-card: #111111;
+  --color-dark-nav: #0d0d0d;
+  --color-dark-border: #1e1e1e;
+  --color-dark-text: #f0f0f0;
+  --color-dark-textMuted: #6b7280;
+  --color-brand: #3b82f6;
+  --color-brand-dark: #1d4ed8;
 }
 
 @layer base {
   body {
     background-color: var(--color-dark-bg);
     color: var(--color-dark-text);
+    font-family: 'Inter', sans-serif;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
@@ -27,7 +31,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-dark-border);
+  background-color: #2a2a2a;
   border-radius: 4px;
 }
 

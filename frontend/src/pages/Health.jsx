@@ -58,7 +58,7 @@ const Health = () => {
             <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 bg-dark-card border border-dark-border p-6 rounded-2xl shadow-lg">
                 <div>
                     <h1 className="text-2xl font-bold flex items-center gap-3">
-                        <Activity size={28} className="text-teal-400" />
+                        <Activity size={28} className="text-blue-400" />
                         Fleet Telemetry
                     </h1>
                     <p className="text-sm text-dark-textMuted mt-1">Real-time underlying API cluster and persistence latency.</p>
@@ -68,7 +68,7 @@ const Health = () => {
                     <label className="flex items-center gap-2 text-sm text-dark-text cursor-pointer">
                         <input
                             type="checkbox"
-                            className="form-checkbox text-teal-500 bg-dark-bg border-dark-border rounded focus:ring-teal-500"
+                            className="form-checkbox text-blue-500 bg-dark-bg border-dark-border rounded focus:ring-blue-500"
                             checked={autoRefresh}
                             onChange={() => setAutoRefresh(!autoRefresh)}
                         />
@@ -130,7 +130,7 @@ const Health = () => {
             </div>
 
             <div className="flex items-center gap-3 text-sm text-dark-textMuted p-4 bg-dark-bg border border-dark-border rounded-xl">
-                <Clock size={16} className="text-teal-400" />
+                <Clock size={16} className="text-blue-400" />
                 <span className="font-semibold text-dark-text">Uptime:</span> {getUptime(health?.uptime)}
                 <span className="mx-2 opacity-30">|</span>
                 <span className="font-semibold text-dark-text">Last Sync:</span> {lastRefresh ? format(lastRefresh, 'HH:mm:ss.SSS') : 'Never'}

@@ -57,7 +57,7 @@ const Consent = () => {
                         {user?.role === 'PATIENT' ? 'Manage who has access to your medical information.' : 'View Active Consents that grant you access to Patient records.'}
                     </p>
                 </div>
-                <div className="w-12 h-12 rounded-full bg-teal-500/10 flex justify-center items-center text-teal-400">
+                <div className="w-12 h-12 rounded-full bg-blue-500/10 flex justify-center items-center text-blue-400">
                     <Lock size={24} />
                 </div>
             </div>
@@ -69,13 +69,13 @@ const Consent = () => {
                         value={staffId}
                         onChange={(e) => setStaffId(e.target.value)}
                         placeholder="Enter Doctor UUID to grant access"
-                        className="flex-1 bg-dark-bg border border-dark-border pl-4 pr-4 py-3 text-sm rounded-xl focus:outline-none focus:ring-1 focus:ring-teal-500 font-mono"
+                        className="flex-1 bg-dark-bg border border-dark-border pl-4 pr-4 py-3 text-sm rounded-xl focus:outline-none focus:ring-1 focus:ring-blue-500 font-mono"
                         required
                     />
                     <button
                         type="submit"
                         disabled={loading}
-                        className="bg-emerald-500 hover:bg-emerald-400 text-dark-bg px-6 py-3 font-semibold rounded-xl text-sm transition-all disabled:opacity-50 flex justify-center items-center gap-2"
+                        className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 font-semibold rounded-xl text-sm transition-all disabled:opacity-50 flex justify-center items-center gap-2"
                     >
                         <LockOpen size={16} /> Grant Access
                     </button>
