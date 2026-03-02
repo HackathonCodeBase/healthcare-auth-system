@@ -2,12 +2,12 @@ import axios from 'axios';
 import useAuthStore from '../store/authStore';
 import toast from 'react-hot-toast';
 
-// 1) Configure API Base URL for Production
-const API_URL = import.meta.env.VITE_API_URL || 'https://healthcare-auth-system.onrender.com/api';
+// 1) Update Frontend API Base URL
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://healthcare-auth-system.onrender.com/api';
 
 const api = axios.create({
-    baseURL: API_URL,
-    withCredentials: true, // Enable credentials support
+    baseURL: API_BASE_URL,
+    withCredentials: true, // Enable credentials support for production 
     headers: {
         'Content-Type': 'application/json',
     },
@@ -66,7 +66,7 @@ api.interceptors.response.use(
                 if (!refreshToken) throw new Error("No refresh token");
 
                 // Use base axios to avoid interceptor recursion
-                const res = await axios.post(`${API_URL}/auth/refresh`, {
+                const res = await axios.post(`${API_BASE_URL}/auth/refresh`, {
                     token: refreshToken
                 }, { withCredentials: true });
 
