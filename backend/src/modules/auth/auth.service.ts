@@ -5,9 +5,10 @@ import * as argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 import { AppError, UnauthorizedError, BadRequestError } from '../../utils/errors';
 import { generateOTP } from '../../utils/otp';
-import { storeOTP, verifyOTP, storeMagicToken, verifyMagicToken } from '../../services/otp.service';
-import { sendOTPEmail, sendPasswordResetEmail, sendMagicLinkEmail } from '../../services/mail.service';
+import { storeOTP, verifyOTP, storeMagicToken, verifyMagicToken, storeResetOTP, verifyResetOTP, storeResetSession, verifyResetSession } from '../../services/otp.service';
+import { sendOTPEmail, sendPasswordResetEmail, sendMagicLinkEmail, sendPasswordChangedEmail } from '../../services/mail.service';
 import crypto from 'crypto';
+import { v4 as uuidv4 } from 'uuid';
 
 export class AuthService {
     static async register(data: any) {
@@ -99,24 +100,42 @@ export class AuthService {
 
     static async forgotPassword(email: string) {
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) {
+        // Account enumeration protection: always return generic success
+        if (!user || user.status !== 'ACTIVE') {
             return true;
         }
 
         const otp = generateOTP();
-        await storeOTP(user.email, otp);
+        await storeResetOTP(user.email, otp);
         await sendPasswordResetEmail(user.email, otp);
 
         return true;
     }
 
-    static async resetPassword(data: any) {
-        const { email, otp, newPassword } = data;
-        const valid = await verifyOTP(email, otp);
+    static async verifyResetOtp(data: any) {
+        const { email, otp } = data;
+        const isValid = await verifyResetOTP(email, otp);
 
-        if (!valid) {
-            throw new BadRequestError('Invalid or expired OTP');
+        if (!isValid) {
+            throw new BadRequestError('Invalid or expired reset code');
         }
+
+        const resetToken = uuidv4();
+        await storeResetSession(email, resetToken);
+
+        return { resetToken };
+    }
+
+    static async resetPassword(data: any) {
+        const { email, token, newPassword } = data;
+
+        const isValidSession = await verifyResetSession(email, token);
+        if (!isValidSession) {
+            throw new BadRequestError('Invalid or expired reset session');
+        }
+
+        const user = await prisma.user.findUnique({ where: { email } });
+        if (!user) throw new BadRequestError('User not found');
 
         const passwordHash = await argon2.hash(newPassword);
 
@@ -124,6 +143,11 @@ export class AuthService {
             where: { email },
             data: { passwordHash }
         });
+
+        // Revoke all refresh tokens for this user
+        await prisma.refreshToken.deleteMany({ where: { userId: user.id } });
+
+        await sendPasswordChangedEmail(user.email);
 
         return true;
     }

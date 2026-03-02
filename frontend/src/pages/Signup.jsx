@@ -227,6 +227,12 @@ const Signup = () => {
                                 </div>
                             </div>
 
+                            <div className="flex justify-start">
+                                <Link to="/forgot-password" title="Recover your account password" aria-label="Forgot Password?" className="text-[10px] text-dark-textMuted hover:text-blue-400 transition-colors">
+                                    Forgot password?
+                                </Link>
+                            </div>
+
                             <button type="submit" disabled={loading} className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2.5 rounded-lg transition-all disabled:opacity-50 disabled:cursor-wait flex items-center justify-center gap-2 text-sm mt-2">
                                 {loading ? <Loader2 size={16} className="animate-spin" /> : (<>Continue <ArrowRight size={15} /></>)}
                             </button>

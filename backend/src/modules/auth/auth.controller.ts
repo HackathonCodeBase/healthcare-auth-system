@@ -47,6 +47,15 @@ export class AuthController {
         }
     }
 
+    static async verifyResetOtp(req: Request, res: Response, next: NextFunction) {
+        try {
+            const data = await AuthService.verifyResetOtp(req.body);
+            res.status(200).json({ success: true, data: { resetToken: data.resetToken } });
+        } catch (error) {
+            next(error);
+        }
+    }
+
     static async magicLink(req: Request, res: Response, next: NextFunction) {
         try {
             await AuthService.magicLink(req.body.email);

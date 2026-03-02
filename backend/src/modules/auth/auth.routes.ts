@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { AuthController } from './auth.controller';
 import { validateRequest } from '../../middleware/validate';
-import { registerSchema, loginSchema, refreshSchema, verifyOtpSchema, resendOtpSchema, forgotPasswordSchema, resetPasswordSchema, magicLinkSchema, magicLoginSchema } from './auth.schema';
+import { registerSchema, loginSchema, refreshSchema, verifyOtpSchema, resendOtpSchema, forgotPasswordSchema, resetPasswordSchema, verifyResetOtpSchema, magicLinkSchema, magicLoginSchema } from './auth.schema';
 import { rateLimiter } from '../../middleware/rateLimiter';
 import { auditLogger } from '../../middleware/auditLogger';
 import { authenticateJWT } from '../../middleware/auth';
@@ -50,15 +50,23 @@ router.post(
     '/forgot-password',
     rateLimiter,
     validateRequest(forgotPasswordSchema),
-    auditLogger('FORGOT_PASSWORD', 'User'),
+    auditLogger('FORGOT_PASSWORD_REQUEST', 'User'),
     AuthController.forgotPassword
+);
+
+router.post(
+    '/verify-reset-otp',
+    rateLimiter,
+    validateRequest(verifyResetOtpSchema),
+    auditLogger('VERIFY_RESET_OTP', 'User'),
+    AuthController.verifyResetOtp
 );
 
 router.post(
     '/reset-password',
     rateLimiter,
     validateRequest(resetPasswordSchema),
-    auditLogger('RESET_PASSWORD', 'User'),
+    auditLogger('RESET_PASSWORD_SUCCESS', 'User'),
     AuthController.resetPassword
 );
 
