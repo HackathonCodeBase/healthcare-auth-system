@@ -25,7 +25,7 @@ export const authenticateJWT = async (req: AuthenticatedRequest, res: Response, 
         const decoded = jwt.verify(token, env.JWT_ACCESS_SECRET) as { id: string; role: string };
         req.user = decoded;
         next();
-    } catch (err) {
+    } catch (err: any) {
         next(new UnauthorizedError('Invalid token'));
     }
 };
