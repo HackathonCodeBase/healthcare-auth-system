@@ -27,7 +27,7 @@ const Assignments = () => {
             // Only doctors and nurses can be assigned
             setUsers(usrData.data.data.users.filter(u => u.role === 'DOCTOR' || u.role === 'NURSE'));
             setPatients(patData.data.data.patients);
-        } catch (error) {
+        } catch {
             toast.error('Failed to load assignments context');
         } finally {
             setLoading(false);
@@ -59,7 +59,7 @@ const Assignments = () => {
             await api.delete(`/admin/assignments/${id}`);
             toast.success('Assignment revoked');
             fetchData();
-        } catch (error) {
+        } catch {
             toast.error('Failed to revoke assignment');
         }
     };

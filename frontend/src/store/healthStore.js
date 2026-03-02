@@ -11,7 +11,7 @@ const useHealthStore = create((set) => ({
         try {
             await axios.get(API_HEALTH_URL, { timeout: 5000 });
             set({ status: 'OK', lastCheck: new Date() });
-        } catch (error) {
+        } catch {
             set({ status: 'DOWN', lastCheck: new Date() });
         }
     }

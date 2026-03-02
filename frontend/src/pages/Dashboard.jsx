@@ -10,11 +10,6 @@ const Dashboard = () => {
     const [health, setHealth] = useState(null);
     const [adminUsers, setAdminUsers] = useState([]);
 
-    useEffect(() => {
-        api.get('/health').then((res) => setHealth(res.data)).catch(() => { });
-        if (user?.role === 'ADMIN') fetchUsers();
-    }, [user?.role]);
-
     const fetchUsers = async () => {
         try {
             const res = await api.get('/users');
@@ -23,6 +18,12 @@ const Dashboard = () => {
             console.error('Failed to fetch users', error);
         }
     };
+
+    useEffect(() => {
+        api.get('/health').then((res) => setHealth(res.data)).catch(() => { });
+        if (user?.role === 'ADMIN') fetchUsers();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [user?.role]);
 
     const toggleUserStatus = async (id, currentStatus) => {
         try {

@@ -43,13 +43,13 @@ api.interceptors.response.use(
 
             while (originalRequest._retryCount < 3) {
                 originalRequest._retryCount++;
-                const toastId = toast.loading(`Waking secure server (Attempt ${originalRequest._retryCount}/3)...`, { id: 'cold-start' });
+                toast.loading(`Waking secure server (Attempt ${originalRequest._retryCount}/3)...`, { id: 'cold-start' });
                 await delay(3000 * originalRequest._retryCount); // Incremental backoff
                 try {
                     const result = await api(originalRequest);
                     toast.success("Server active", { id: 'cold-start' });
                     return result;
-                } catch (retryError) {
+                } catch {
                     if (originalRequest._retryCount >= 3) {
                         toast.error("Cluster delayed. Please refresh.", { id: 'cold-start' });
                     }
