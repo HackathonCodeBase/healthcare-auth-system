@@ -230,6 +230,24 @@ npm install
 npm run dev # Runs on port 5173
 ```
 
+---
+
+## ☁️ Deployment
+
+The project has been prepared for production deployment utilizing **Supabase** (PostgreSQL), **Redis Cloud**, and **Render.com**.
+
+### 1. Backend (Render.com)
+1. Commit the applied configuration updates and push to GitHub.
+2. In Render, create a new **Web Service** connected to your repository.
+3. Use the following build setup:
+    - **Build Command**: `npm install && npm run build`
+    - **Start Command**: `npm start`
+4. Copy all production variables from your `.env` to Render's **Environment Variables** settings.
+
+### 2. Frontend
+Update `VITE_API_URL` within `frontend/.env.production` to point to the newly deployed backend's URL. The frontend can visually be deployed to Render as a "Static Site" or Vercel using `npm run build`.
+
+For a comprehensive breakdown, see the [Deployment Guide](DEPLOYMENT_GUIDE.md).
 
 ---
 
