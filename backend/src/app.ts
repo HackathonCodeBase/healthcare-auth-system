@@ -24,7 +24,9 @@ app.use(helmet());
 const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:5174',
-    'https://codezenmediauth.vercel.app'
+    'https://codezenmediauth.vercel.app',
+    'https://healthcare-auth-system-owawg01o7-sudarshan1005s-projects.vercel.app',
+    'https://healthcare-auth-system.vercel.app'
 ];
 
 if (env.FRONTEND_URL) {
