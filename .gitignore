@@ -27,3 +27,4 @@ backend/.env
 frontend/.env
 coverage/
 *.log
+.env

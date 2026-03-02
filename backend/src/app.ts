@@ -21,14 +21,21 @@ const app = express();
 // Security Middleware
 app.use(helmet());
 
-const allowedOrigins = ['http://localhost:5173', 'http://localhost:5174'];
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'https://codezenmediauth.vercel.app'
+];
+
 if (env.FRONTEND_URL) {
     allowedOrigins.push(env.FRONTEND_URL);
 }
 
 app.use(cors({
     origin: allowedOrigins,
-    credentials: true
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 // Body parser
