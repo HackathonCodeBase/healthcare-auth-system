@@ -230,17 +230,6 @@ npm install
 npm run dev # Runs on port 5173
 ```
 
----
-
-## 💎 Demo Login Accounts
-Use these credentials for a full system walkthrough. **Default Password: `Demo123!`**
-
-| Role | Email | Use Case |
-| :--- | :--- | :--- |
-| **👑 ADMIN** | `acharyasiddarth74@gmail.com` | View system-wide Audit Logs and forensics. |
-| **🧑‍⚕️ DOCTOR** | `siddharthjabroni@gmail.com` | Access records via Assignment or Break-Glass. |
-| **👩‍⚕️ NURSE** | `s0188791@gmail.com` | View safe patient data (restricted PII). |
-| **🧑 PATIENT** | `siddharthacharyaa@gmail.com` | Manage Consent and view self-privacy logs. |
 
 ---
 
