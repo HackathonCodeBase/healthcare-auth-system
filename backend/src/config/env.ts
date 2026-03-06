@@ -14,6 +14,10 @@ const envSchema = z.object({
     EMAIL_USER: z.string().email(),
     EMAIL_PASS: z.string().min(1),
     NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+<<<<<<< HEAD
+=======
+    FRONTEND_URL: z.string().optional(),
+>>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
 });
 
 const parsed = envSchema.safeParse(process.env);

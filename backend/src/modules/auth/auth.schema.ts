@@ -51,11 +51,26 @@ export const forgotPasswordSchema = z.object({
     }),
 });
 
+<<<<<<< HEAD
 export const resetPasswordSchema = z.object({
     body: z.object({
         email: emailSchema,
         otp: z.string().min(6),
         newPassword: z.string().min(8),
+=======
+export const verifyResetOtpSchema = z.object({
+    body: z.object({
+        email: emailSchema,
+        otp: z.string().length(6),
+    }),
+});
+
+export const resetPasswordSchema = z.object({
+    body: z.object({
+        email: emailSchema,
+        token: z.string().min(10),
+        newPassword: z.string().min(8).regex(/[A-Z]/, "Password must contain an uppercase letter").regex(/[0-9]/, "Password must contain a number"),
+>>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     }),
 });
 

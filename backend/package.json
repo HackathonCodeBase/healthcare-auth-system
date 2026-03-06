@@ -7,9 +7,17 @@
     "start": "node dist/server.js",
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
+<<<<<<< HEAD
     "lint": "eslint src/**/*.ts",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev"
+=======
+    "postinstall": "prisma generate",
+    "lint": "eslint src/**/*.ts",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy"
+>>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
   },
   "dependencies": {
     "@casl/ability": "^6.5.0",
@@ -44,4 +52,8 @@
   "prisma": {
     "seed": "tsx prisma/seed.ts"
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107

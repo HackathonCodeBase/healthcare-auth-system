@@ -17,7 +17,11 @@ const Patients = () => {
             setLoading(true);
             const res = await api.get('/patients');
             setPatients(res.data.data.patients || []);
+<<<<<<< HEAD
         } catch (error) {
+=======
+        } catch {
+>>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Failed to load patients. Access denied or server error.');
         } finally {
             setLoading(false);
@@ -33,7 +37,11 @@ const Patients = () => {
             setModalLoading(true);
             const res = await api.get(`/patients/${id}`);
             setSelectedPatient(res.data.data.patient);
+<<<<<<< HEAD
         } catch (error) {
+=======
+        } catch {
+>>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Access Denied: Missing Context or Consent');
             setSelectedPatient(null);
         } finally {
