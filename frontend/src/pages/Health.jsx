@@ -16,11 +16,7 @@ const Health = () => {
             const res = await api.get('/health');
             setHealth(res.data);
             setLastRefresh(new Date());
-<<<<<<< HEAD
         } catch (err) {
-=======
-        } catch {
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Failed to probe health metrics. System might be down.');
             setHealth({ status: 'DOWN', database: 'DISCONNECTED', redis: 'DISCONNECTED', uptime: 0 });
         } finally {

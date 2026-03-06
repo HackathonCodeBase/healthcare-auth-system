@@ -26,9 +26,4 @@ node_modules/
 backend/.env
 frontend/.env
 coverage/
-<<<<<<< HEAD
 *.log
-=======
-*.log
-.env
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107

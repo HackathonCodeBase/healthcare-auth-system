@@ -9,13 +9,6 @@ export const transporter = nodemailer.createTransport({
 });
 
 export async function sendOTPEmail(to: string, otp: string) {
-<<<<<<< HEAD
-=======
-    if (to.endsWith('@medauth.test')) {
-        console.log(`[TEST_MAIL_BYPASS] OTP for ${to}: ${otp}`);
-        return;
-    }
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     try {
         await transporter.sendMail({
             from: `"MedAuth" <${process.env.EMAIL_USER}>`,
@@ -34,13 +27,6 @@ export async function sendOTPEmail(to: string, otp: string) {
 }
 
 export async function sendPasswordResetEmail(to: string, otp: string) {
-<<<<<<< HEAD
-=======
-    if (to.endsWith('@medauth.test')) {
-        console.log(`[TEST_MAIL_BYPASS] Password Reset OTP for ${to}: ${otp}`);
-        return;
-    }
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     try {
         await transporter.sendMail({
             from: `"MedAuth" <${process.env.EMAIL_USER}>`,
@@ -59,13 +45,6 @@ export async function sendPasswordResetEmail(to: string, otp: string) {
 }
 
 export async function sendMagicLinkEmail(to: string, url: string) {
-<<<<<<< HEAD
-=======
-    if (to.endsWith('@medauth.test')) {
-        console.log(`[TEST_MAIL_BYPASS] Magic Link for ${to}: ${url}`);
-        return;
-    }
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     try {
         await transporter.sendMail({
             from: `"MedAuth" <${process.env.EMAIL_USER}>`,
@@ -82,27 +61,3 @@ export async function sendMagicLinkEmail(to: string, url: string) {
         console.error("Error sending magic link email: ", err);
     }
 }
-<<<<<<< HEAD
-=======
-export async function sendPasswordChangedEmail(to: string) {
-    if (to.endsWith('@medauth.test')) {
-        console.log(`[TEST_MAIL_BYPASS] Password Changed Confirmation for ${to}`);
-        return;
-    }
-    try {
-        await transporter.sendMail({
-            from: `"MedAuth" <${process.env.EMAIL_USER}>`,
-            to,
-            subject: "Your password has been changed",
-            html: `
-        <h2>Password Changed</h2>
-        <p>Your MedAuth password has been successfully changed.</p>
-        <p>If you did not perform this action, please contact support immediately.</p>
-        <p>Timestamp: ${new Date().toLocaleString()}</p>
-      `,
-        });
-    } catch (err) {
-        console.error("Error sending password change confirmation email: ", err);
-    }
-}
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107

@@ -27,11 +27,7 @@ const Assignments = () => {
             // Only doctors and nurses can be assigned
             setUsers(usrData.data.data.users.filter(u => u.role === 'DOCTOR' || u.role === 'NURSE'));
             setPatients(patData.data.data.patients);
-<<<<<<< HEAD
         } catch (error) {
-=======
-        } catch {
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Failed to load assignments context');
         } finally {
             setLoading(false);
@@ -63,11 +59,7 @@ const Assignments = () => {
             await api.delete(`/admin/assignments/${id}`);
             toast.success('Assignment revoked');
             fetchData();
-<<<<<<< HEAD
         } catch (error) {
-=======
-        } catch {
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Failed to revoke assignment');
         }
     };
@@ -97,7 +89,7 @@ const Assignments = () => {
                         >
                             <option value="">Select Staff...</option>
                             {users.map(u => (
-                                <option key={u.id} value={u.id}>{u.name} ({u.role})</option>
+                                <option key={u.id} value={u.id}>{u.name} ({u.role}{u.specialty ? ` - ${u.specialty}` : ''})</option>
                             ))}
                         </select>
                     </div>
@@ -145,7 +137,8 @@ const Assignments = () => {
                                 <tr key={a.id} className="hover:bg-dark-bg/50 transition-colors">
                                     <td className="px-6 py-4">
                                         <div className="font-semibold text-dark-text">{a.staff?.name}</div>
-                                        <div className="text-[10px] uppercase font-bold text-blue-400">{a.staff?.role}</div>
+                                        <div className="text-[10px] uppercase font-bold text-blue-400">{a.staff?.role} {a.staff?.specialty ? `• ${a.staff?.specialty}` : ''}</div>
+                                        {a.staff?.contactNumber && <div className="text-[10px] text-dark-textMuted">{a.staff.contactNumber}</div>}
                                     </td>
                                     <td className="px-6 py-4">
                                         <div className="font-semibold text-dark-text">{a.patient?.user?.name || 'Unknown Patient'}</div>

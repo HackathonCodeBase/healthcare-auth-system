@@ -100,15 +100,6 @@ const Login = () => {
                             </div>
                         </div>
 
-<<<<<<< HEAD
-=======
-                        <div className="flex justify-end pr-1">
-                            <Link to="/forgot-password" title="Recover your password" aria-label="Forgot Password?" className="text-xs text-dark-textMuted hover:text-blue-400 transition-colors">
-                                Forgot password?
-                            </Link>
-                        </div>
-
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
                         <button
                             type="submit"
                             disabled={loading}

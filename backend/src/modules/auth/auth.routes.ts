@@ -1,11 +1,7 @@
 import { Router } from 'express';
 import { AuthController } from './auth.controller';
 import { validateRequest } from '../../middleware/validate';
-<<<<<<< HEAD
 import { registerSchema, loginSchema, refreshSchema, verifyOtpSchema, resendOtpSchema, forgotPasswordSchema, resetPasswordSchema, magicLinkSchema, magicLoginSchema } from './auth.schema';
-=======
-import { registerSchema, loginSchema, refreshSchema, verifyOtpSchema, resendOtpSchema, forgotPasswordSchema, resetPasswordSchema, verifyResetOtpSchema, magicLinkSchema, magicLoginSchema } from './auth.schema';
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
 import { rateLimiter } from '../../middleware/rateLimiter';
 import { auditLogger } from '../../middleware/auditLogger';
 import { authenticateJWT } from '../../middleware/auth';
@@ -54,34 +50,15 @@ router.post(
     '/forgot-password',
     rateLimiter,
     validateRequest(forgotPasswordSchema),
-<<<<<<< HEAD
     auditLogger('FORGOT_PASSWORD', 'User'),
-=======
-    auditLogger('FORGOT_PASSWORD_REQUEST', 'User'),
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     AuthController.forgotPassword
 );
 
 router.post(
-<<<<<<< HEAD
     '/reset-password',
     rateLimiter,
     validateRequest(resetPasswordSchema),
     auditLogger('RESET_PASSWORD', 'User'),
-=======
-    '/verify-reset-otp',
-    rateLimiter,
-    validateRequest(verifyResetOtpSchema),
-    auditLogger('VERIFY_RESET_OTP', 'User'),
-    AuthController.verifyResetOtp
-);
-
-router.post(
-    '/reset-password',
-    rateLimiter,
-    validateRequest(resetPasswordSchema),
-    auditLogger('RESET_PASSWORD_SUCCESS', 'User'),
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     AuthController.resetPassword
 );
 

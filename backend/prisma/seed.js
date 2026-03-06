@@ -1,12 +1,43 @@
-import { PrismaClient } from "@prisma/client";
-import * as argon2 from "argon2";
-import process from "process";
-
-const prisma = new PrismaClient();
-
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || (function () {
+    var ownKeys = function(o) {
+        ownKeys = Object.getOwnPropertyNames || function (o) {
+            var ar = [];
+            for (var k in o) if (Object.prototype.hasOwnProperty.call(o, k)) ar[ar.length] = k;
+            return ar;
+        };
+        return ownKeys(o);
+    };
+    return function (mod) {
+        if (mod && mod.__esModule) return mod;
+        var result = {};
+        if (mod != null) for (var k = ownKeys(mod), i = 0; i < k.length; i++) if (k[i] !== "default") __createBinding(result, mod, k[i]);
+        __setModuleDefault(result, mod);
+        return result;
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+const client_1 = require("@prisma/client");
+const argon2 = __importStar(require("argon2"));
+const prisma = new client_1.PrismaClient();
 async function main() {
     const password = await argon2.hash("Demo123!");
-
     // ======================
     // USERS
     // ======================
@@ -23,7 +54,6 @@ async function main() {
             contactNumber: "+1-555-0101",
         },
     });
-
     const doctor = await prisma.user.upsert({
         where: { email: "doctor@demo.com" },
         update: { passwordHash: password, isVerified: true, status: "ACTIVE" },
@@ -38,7 +68,6 @@ async function main() {
             contactNumber: "+1-555-0202",
         },
     });
-
     const nurse = await prisma.user.upsert({
         where: { email: "nurse@demo.com" },
         update: { passwordHash: password, isVerified: true, status: "ACTIVE" },
@@ -52,7 +81,6 @@ async function main() {
             contactNumber: "+1-555-0303",
         },
     });
-
     const patientUser = await prisma.user.upsert({
         where: { email: "patient@demo.com" },
         update: { passwordHash: password, isVerified: true, status: "ACTIVE" },
@@ -67,7 +95,6 @@ async function main() {
             address: "123 Main St, Springfield",
         },
     });
-
     const doctor2 = await prisma.user.upsert({
         where: { email: "doctor2@demo.com" },
         update: { passwordHash: password, isVerified: true, status: "ACTIVE" },
@@ -82,7 +109,6 @@ async function main() {
             contactNumber: "+1-555-0505",
         },
     });
-
     const doctor3 = await prisma.user.upsert({
         where: { email: "doctor3@demo.com" },
         update: { passwordHash: password, isVerified: true, status: "ACTIVE" },
@@ -97,7 +123,6 @@ async function main() {
             contactNumber: "+1-555-0606",
         },
     });
-
     const patientUser2 = await prisma.user.upsert({
         where: { email: "patient2@demo.com" },
         update: { passwordHash: password, isVerified: true, status: "ACTIVE" },
@@ -112,7 +137,6 @@ async function main() {
             address: "456 Oak Rd, Springfield",
         },
     });
-
     const patientUser3 = await prisma.user.upsert({
         where: { email: "patient3@demo.com" },
         update: { passwordHash: password, isVerified: true, status: "ACTIVE" },
@@ -127,7 +151,6 @@ async function main() {
             address: "789 Pine Ln, Springfield",
         },
     });
-
     // ======================
     // PATIENT RECORD
     // ======================
@@ -143,7 +166,6 @@ async function main() {
             gender: "Male",
         },
     });
-
     const patient2 = await prisma.patient.upsert({
         where: { userId: patientUser2.id },
         update: {},
@@ -156,7 +178,6 @@ async function main() {
             gender: "Female",
         },
     });
-
     const patient3 = await prisma.patient.upsert({
         where: { userId: patientUser3.id },
         update: {},
@@ -169,7 +190,6 @@ async function main() {
             gender: "Female",
         },
     });
-
     // ======================
     // ASSIGNMENT
     // ======================
@@ -185,7 +205,6 @@ async function main() {
             },
         });
     }
-
     const existingAssignment2 = await prisma.assignment.findFirst({
         where: { staffId: doctor2.id, patientId: patient2.id }
     });
@@ -197,7 +216,6 @@ async function main() {
             },
         });
     }
-
     const existingAssignment3 = await prisma.assignment.findFirst({
         where: { staffId: doctor3.id, patientId: patient3.id }
     });
@@ -209,7 +227,6 @@ async function main() {
             },
         });
     }
-
     const existingAssignment4 = await prisma.assignment.findFirst({
         where: { staffId: doctor.id, patientId: patient2.id }
     });
@@ -221,7 +238,6 @@ async function main() {
             },
         });
     }
-
     // ======================
     // CONSENT
     // ======================
@@ -232,11 +248,10 @@ async function main() {
         await prisma.consent.create({
             data: {
                 patientId: patientUser.id, // User ID of the patient
-                staffId: nurse.id,         // User ID of the nurse
+                staffId: nurse.id, // User ID of the nurse
             },
         });
     }
-
     // ======================
     // EMERGENCY ACCESS SAMPLE
     // ======================
@@ -248,15 +263,13 @@ async function main() {
             expiresAt: new Date(Date.now() + 2 * 60 * 60 * 1000), // 2 hours
         },
     });
-
     console.log("💀 Demo data seeded successfully");
 }
-
 main()
     .catch((e) => {
-        console.error(e);
-        process.exit(1);
-    })
+    console.error(e);
+    process.exit(1);
+})
     .finally(async () => {
-        await prisma.$disconnect();
-    });
+    await prisma.$disconnect();
+});

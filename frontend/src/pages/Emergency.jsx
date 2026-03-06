@@ -20,11 +20,7 @@ const Emergency = () => {
             const now = new Date().getTime();
             const active = (res.data.data.emergencies || []).filter(e => new Date(e.expiresAt).getTime() > now);
             setEmergencies(active);
-<<<<<<< HEAD
         } catch (err) {
-=======
-        } catch {
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Failed to load emergency logs');
         } finally {
             setFetching(false);

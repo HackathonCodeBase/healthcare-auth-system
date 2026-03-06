@@ -14,39 +14,14 @@ import adminRoutes from './modules/admin/admin.routes';
 import { logger } from './config/logger';
 import { prisma } from './config/database';
 import { redis } from './config/redis';
-<<<<<<< HEAD
-=======
-import { env } from './config/env';
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
 
 const app = express();
 
 // Security Middleware
 app.use(helmet());
-<<<<<<< HEAD
 app.use(cors({
     origin: ['http://localhost:5173', 'http://localhost:5174'],
     credentials: true
-=======
-
-const allowedOrigins = [
-    'http://localhost:5173',
-    'http://localhost:5174',
-    'https://codezenmediauth.vercel.app',
-    'https://healthcare-auth-system-owawg01o7-sudarshan1005s-projects.vercel.app',
-    'https://healthcare-auth-system.vercel.app'
-];
-
-if (env.FRONTEND_URL) {
-    allowedOrigins.push(env.FRONTEND_URL);
-}
-
-app.use(cors({
-    origin: allowedOrigins,
-    credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
 }));
 
 // Body parser

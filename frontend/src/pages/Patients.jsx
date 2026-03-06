@@ -17,11 +17,7 @@ const Patients = () => {
             setLoading(true);
             const res = await api.get('/patients');
             setPatients(res.data.data.patients || []);
-<<<<<<< HEAD
         } catch (error) {
-=======
-        } catch {
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Failed to load patients. Access denied or server error.');
         } finally {
             setLoading(false);
@@ -37,11 +33,7 @@ const Patients = () => {
             setModalLoading(true);
             const res = await api.get(`/patients/${id}`);
             setSelectedPatient(res.data.data.patient);
-<<<<<<< HEAD
         } catch (error) {
-=======
-        } catch {
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
             toast.error('Access Denied: Missing Context or Consent');
             setSelectedPatient(null);
         } finally {
@@ -150,9 +142,22 @@ const Patients = () => {
                                     <p className="text-sm font-medium">{new Date(selectedPatient.dateOfBirth).toLocaleDateString()}</p>
                                 </div>
                                 <div className="space-y-1">
-                                    <p className="text-xs font-semibold text-dark-textMuted uppercase">Contact</p>
-                                    <p className="text-sm font-medium">{selectedPatient.user?.email || 'N/A'}</p>
+                                    <p className="text-xs font-semibold text-dark-textMuted uppercase">Gender</p>
+                                    <p className="text-sm font-medium">{selectedPatient.gender || 'N/A'}</p>
                                 </div>
+                                <div className="space-y-1">
+                                    <p className="text-xs font-semibold text-dark-textMuted uppercase">Blood Group</p>
+                                    <p className="text-sm font-medium text-red-400">{selectedPatient.bloodGroup || 'Unknown'}</p>
+                                </div>
+                                <div className="space-y-1">
+                                    <p className="text-xs font-semibold text-dark-textMuted uppercase">Contact</p>
+                                    <p className="text-sm font-medium">{selectedPatient.user?.contactNumber || selectedPatient.user?.email || 'N/A'}</p>
+                                </div>
+                                <div className="space-y-1 col-span-2">
+                                    <p className="text-xs font-semibold text-dark-textMuted uppercase">Address</p>
+                                    <p className="text-sm font-medium">{selectedPatient.user?.address || 'N/A'}</p>
+                                </div>
+
                             </div>
 
                             <div className="border border-dark-border rounded-xl p-4 bg-dark-bg">

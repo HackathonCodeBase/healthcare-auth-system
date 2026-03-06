@@ -18,10 +18,6 @@ import AuditLogs from './pages/AuditLogs';
 import Health from './pages/Health';
 import Privacy from './pages/Privacy';
 import Assignments from './pages/Assignments';
-<<<<<<< HEAD
-=======
-import ForgotPassword from './pages/ForgotPassword';
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
   const { isAuthenticated, user } = useAuthStore();
@@ -67,10 +63,6 @@ const App = () => {
         <Routes>
           <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/" replace />} />
           <Route path="/signup" element={!isAuthenticated ? <Signup /> : <Navigate to="/" replace />} />
-<<<<<<< HEAD
-=======
-          <Route path="/forgot-password" element={!isAuthenticated ? <ForgotPassword /> : <Navigate to="/" replace />} />
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
 
           {/* Protected Area */}
           <Route path="/" element={<ProtectedRoute><Layout><Dashboard /></Layout></ProtectedRoute>} />

@@ -10,14 +10,11 @@ const Dashboard = () => {
     const [health, setHealth] = useState(null);
     const [adminUsers, setAdminUsers] = useState([]);
 
-<<<<<<< HEAD
     useEffect(() => {
         api.get('/health').then((res) => setHealth(res.data)).catch(() => { });
         if (user?.role === 'ADMIN') fetchUsers();
     }, [user?.role]);
 
-=======
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     const fetchUsers = async () => {
         try {
             const res = await api.get('/users');
@@ -27,15 +24,6 @@ const Dashboard = () => {
         }
     };
 
-<<<<<<< HEAD
-=======
-    useEffect(() => {
-        api.get('/health').then((res) => setHealth(res.data)).catch(() => { });
-        if (user?.role === 'ADMIN') fetchUsers();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [user?.role]);
-
->>>>>>> 3b5969d318a5ab0380d1a8d5df4c76d8197bf107
     const toggleUserStatus = async (id, currentStatus) => {
         try {
             const newStatus = currentStatus === 'ACTIVE' ? 'SUSPENDED' : 'ACTIVE';
